@@ -1,3 +1,169 @@
 <html>
-測試
+<head>
+<title>Dmath calculator</title>
+</head>
+
+<style type="text/css">
+	table{
+    border-collapse:collapse;
+    border:1px solid black;
+	}
+</style>
+<script>
+	function Factorial(n)
+	   { 
+			fact = 1;
+			for (i=2; i<=n; i++)
+			{
+				fact *= i;
+			}
+			return fact;
+	   }
+
+	function Perm(n, r)
+		{ 
+			perm = n;
+			for (i=n-1; i>n-r; i--)
+			{
+				perm *= i;
+			}
+			return perm;
+		}
+		
+	function Comb(n, r)
+		{ 
+			return Perm(n, r) / Factorial(r);
+		} 
+
+	function clickPerm()
+		{ 
+			document.getElementById("resPermutation").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			if (invalid(n, r)) return;
+			document.getElementById("resPermutation").innerHTML = Perm(n, r);
+		}
+	
+	function clickComb()
+		{ 
+			document.getElementById("resCombination").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;          
+			if (invalid(n, r)) return;    
+			document.getElementById("resCombination").innerHTML = Comb(n, r);
+		}
+	
+	function clickArra()
+		{ 
+			document.getElementById("resArrangement").innerHTML = ""
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			if (invalid(n, r)) return;    
+			document.getElementById("resArrangement").innerHTML = Math.pow(n, r);
+		}
+		
+	function clickSele()
+		{ 
+			document.getElementById("resSelectrofn").innerHTML = "";
+			n = parseInt(document.getElementById("n").value);
+			r = parseInt(document.getElementById("r").value);
+			if (invalid(n, r)) return;
+			document.getElementById("resSelectrofn").innerHTML = Comb(n + r - 1, r);
+		}
+   
+    function invalid(n, r)
+
+	   { 
+			if (parseInt(n) < 0 || isNaN(parseInt(n)))
+			{ 
+				document.getElementById("n").focus();
+				return true;
+			}
+
+			else if (parseInt(r) < 0 || isNaN(parseInt(r)))
+
+			{ 
+				document.getElementById("r").focus();
+				return true;
+			}
+
+			return false;
+
+	   }
+	
+	function computeAll()
+		{ 
+			document.getElementById("resPermutation").innerHTML = "";
+			document.getElementById("resCombination").innerHTML = "";
+			document.getElementById("resArrangement").innerHTML = "";
+			document.getElementById("resSelectrofn").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			if (invalid(n, r)) return;    
+			clickPerm();
+			clickComb();
+			clickArra();
+			clickSele();
+		}
+	
+</script>
+
+<body>
+<center>
+<h2>
+	<font size=+2>D</font>iscrete
+	<font size=+2>M</font>ath
+	<font size=+2>C</font>alculator
+</h2>
+</center>
+<p>
+<center>
+	<table border = 1>
+		<tr align = center height = 40>
+			<td width = 100>Formula</td>
+			<td width = 200>
+				n=<input type="number" id="n" value="7" min="0" style="width: 5em"/>
+				r=<input type="number" id="r" value="3" min="0" style="width: 5em"/>
+
+			</td>
+			<td width = 200><button type="button" onclick="computeAll()">Compute All</button></td>
+			<td width = 100>Order relevant</td>
+			<td width = 100>Repetition</td>
+			<td width = 450>Memo</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>P(n, r)</td>
+			<td width = 200><span id="resPermutation"></span></td>
+			<td width = 200><button type="button" onclick="clickPerm()">Permutation</button></td>
+			<td width = 100>yes</td>
+			<td width = 100>no</td>
+			<td width = 450 align = left># Permutations of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>C(n, r)</td>
+			<td width = 200><span id="resCombination"></span></td>
+			<td width = 200><button type="button" onclick="clickComb()">Combination</button></td>
+			<td width = 100>no</td>
+			<td width = 100>no</td>
+			<td width = 450 align = left># Selections/Combinations of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>n<sup>r</sup></td>
+			<td width = 200><span id="resArrangement"></span></td>
+			<td width = 200><button type="button" onclick="clickArra()">Arrangement with repetition</button></td>
+			<td width = 100>yes</td>
+			<td width = 100>yes</td>
+			<td width = 450 align = left># Arrangements with repetition of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>C(r+n-1, r)</td>
+			<td width = 200><span id="resSelectrofn"></span></td>
+			<td width = 200><button type="button" onclick="clickSele()">Selection with repetition</button></td>
+			<td width = 100>no</td>
+			<td width = 100>yes</td>
+			<td width = 450 align = left># Selections with repetition of size r from n distinct objects</td>
+		</tr>
+	</table>
+</center>
+</body>
 </html>
