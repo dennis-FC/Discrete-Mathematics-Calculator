@@ -104,17 +104,132 @@
 			clickComb();
 			clickArra();
 			clickSele();
+		}	
+</script>
+<script>
+	function clickCatalan()
+		{
+			document.getElementById("resCatalan").innerHTML = "";
+			z = document.getElementById("z").value;
+			if (invalid(2*z, z)) return;
+			document.getElementById("resCatalan").innerHTML = (Comb(2*z, z))/(z*1+1);
+		}
+		
+	function clicktri()
+		{
+			document.getElementById("restri").innerHTML = "";
+			z = document.getElementById("z").value;
+			if (invalid(z*1+1, 2)) return;
+			document.getElementById("restri").innerHTML = Comb(z*1+1, 2);
+		}	
+		
+	function clickharmonic()
+		{
+			document.getElementById("resharmonic").innerHTML = "";
+			z = document.getElementById("z").value;
+			har = 1;
+			for (i=2;i<=z*1;i++)
+			{
+				har += 1/i;
+			}
+			document.getElementById("resharmonic").innerHTML = har;
+		}
+	
+	function clickfib()
+		{
+			document.getElementById("refib").innerHTML = "";
+			z = document.getElementById("z").value;
+			document.getElementById("refib").innerHTML = fib(z);
+		}
+	function fib(z)
+		{
+			if (z <= 1) 
+				return z; 
+			return fib(z-1) + fib(z-2); 
+		}
+		
+	function clicklucas()
+		{
+			document.getElementById("relucas").innerHTML = "";
+			z = document.getElementById("z").value;
+			document.getElementById("relucas").innerHTML = lucas(z*1);
+		}
+	function lucas(z)
+		{
+			if (z == 0) 
+				return 2; 
+			if (z == 1) 
+				return 1; 
+  
+			return lucas(z - 1) +  lucas(z - 2); 
+		}
+	
+	function clickeulerian()
+		{
+			document.getElementById("reeulerian").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			document.getElementById("reeulerian").innerHTML = eulerian(n*1,r*1);
+		}
+	function eulerian(n,m)
+		{
+			if (m >= n || n == 0)
+			{
+				return 0; 
+			}
+			if (m == 0)
+			{
+				return 1; 
+			}
+			return (n - m) * eulerian(n - 1, m - 1) +(m + 1) * eulerian(n - 1, m);	
+		}
+		
+	function clickstirling()
+		{
+			document.getElementById("restirling").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			document.getElementById("restirling").innerHTML = stirling(n*1,r*1);
+		}
+	function stirling(n,k)
+		{
+			if (k == 0 && n != 0)
+				return 0;
+			else if (k == n)
+				return 1;
+			else
+				return k*stirling(n-1, k) + stirling(n-1, k-1);
+		}
+		
+	function Compute_number()
+		{
+			document.getElementById("resCatalan").innerHTML = "";
+			document.getElementById("restri").innerHTML = "";
+			document.getElementById("resharmonic").innerHTML = "";
+			document.getElementById("refib").innerHTML = "";
+			document.getElementById("relucas").innerHTML = "";
+			document.getElementById("reeulerian").innerHTML = "";
+			document.getElementById("restirling").innerHTML = "";
+			n = document.getElementById("n").value;
+			r = document.getElementById("r").value;
+			if (invalid(n, r)) return;
+			clickCatalan();
+			clicktri();
+			clickharmonic();
+			clickfib();
+			clicklucas();
+			clickeulerian();
+			clickstirling();
 		}
 	
 </script>
-
-<body>
+<body background="picc.png">
 <center>
-<h2>
-	<font size=+2>D</font>iscrete
-	<font size=+2>M</font>ath
-	<font size=+2>C</font>alculator
-</h2>
+<h1>
+	<font size=+3>D</font>iscrete
+	<font size=+3>M</font>ath
+	<font size=+3>C</font>alculator
+</h1>
 </center>
 <p>
 <center>
@@ -124,7 +239,6 @@
 			<td width = 200>
 				n=<input type="number" id="n" value="7" min="0" style="width: 5em"/>
 				r=<input type="number" id="r" value="3" min="0" style="width: 5em"/>
-
 			</td>
 			<td width = 200><button type="button" onclick="computeAll()">Compute All</button></td>
 			<td width = 100>Order relevant</td>
@@ -163,6 +277,60 @@
 			<td width = 100>yes</td>
 			<td width = 450 align = left># Selections with repetition of size r from n distinct objects</td>
 		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	<table border=1>
+		<tr align = center height = 40>
+			<td width = 250>Number</td>
+			<td width = 100>z=<input type="number" id="z" value="5" min="0" style="width: 5em"/></td>
+			<td width = 250><button type="button" onclick="Compute_number()">Compute number</button></td>
+			<td width = 300>Memo</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Catalan Numbers</td>
+			<td width = 100><span id="resCatalan"></span></td>
+			<td width = 250><button type="button" onclick="clickCatalan()">Catalan Numbers</button></td>
+			<td width = 300 align = left>#C(z) = C(2z,z)/(z+1)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Triangular Numbers</td>
+			<td width = 100><span id="restri"></span></td>
+			<td width = 250><button type="button" onclick="clicktri()">Triangular Numbers</button></td>
+			<td width = 300 align = left>#T(z) = C(z+1,2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Harmonic Numbers</td>
+			<td width = 100><span id="resharmonic"></span></td>
+			<td width = 250><button type="button" onclick="clickharmonic()">Harmonic Numbers</button></td>
+			<td width = 300 align = left>#H(z) = 1+1/2+1/3+...+1/z</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Fibonacci Numbers</td>
+			<td width = 100><span id="refib"></span></td>
+			<td width = 250><button type="button" onclick="clickfib()">Fibonacci Numbers</button></td>
+			<td width = 300 align = left>#F(z) = F(z-1)+F(z-2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Lucas Numbers</td>
+			<td width = 100><span id="relucas"></span></td>
+			<td width = 250><button type="button" onclick="clicklucas()">Lucas Numbers</button></td>
+			<td width = 300 align = left>#L(0)=2;L(1)=1;L(z) = L(z-1)+L(z-2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Eulerian Numbers</td>
+			<td width = 100><span id="reeulerian"></span></td>
+			<td width = 250><button type="button" onclick="clickeulerian()">Eulerian Numbers</button></td>
+			<td width = 300 align = left>#A(n,r) = (n-r)*A(n-1,r-1)+(r+1)A(n-1,r)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 250>Stirling number of the second kind</td>
+			<td width = 100><span id="restirling"></span></td>
+			<td width = 250><button type="button" onclick="clickstirling()">Stirling number of the second kind</button></td>
+			<td width = 300 align = left>#S(n,r)=S(n-1,r-1)+r*S(n-1,r)</td>
+		</tr>
+		
 	</table>
 </center>
 </body>
