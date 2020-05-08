@@ -112,7 +112,7 @@
 			document.getElementById("resCatalan").innerHTML = "";
 			z = document.getElementById("z").value;
 			if (invalid(2*z, z)) return;
-			if (z == 0) document.getElementById("resCatalan").innerHTML = 1;
+			if (z == 0) {document.getElementById("resCatalan").innerHTML = 1;}
 			else document.getElementById("resCatalan").innerHTML = (Comb(2*z, z))/(z*1+1);
 		}
 		
